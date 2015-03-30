@@ -10,4 +10,8 @@
 
 @implementation AGTBook
 
+-(BOOL)hasTag:(NSString *)tag {
+    return [self.tags containsObject:tag];
+}
+
 @end

@@ -13,6 +13,7 @@
 		EDBD3FF01AC90A6F000A7B5F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBD3FEE1AC90A6F000A7B5F /* LaunchScreen.xib */; };
 		EDBD3FFC1AC90A6F000A7B5F /* HackerBooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD3FFB1AC90A6F000A7B5F /* HackerBooksTests.m */; };
 		EDBD40081AC90EB1000A7B5F /* AGTBook.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD40071AC90EB1000A7B5F /* AGTBook.m */; };
+		EDBD400B1AC91062000A7B5F /* AGTLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD400A1AC91062000A7B5F /* AGTLibrary.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 		EDBD3FFB1AC90A6F000A7B5F /* HackerBooksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HackerBooksTests.m; sourceTree = "<group>"; };
 		EDBD40061AC90EB1000A7B5F /* AGTBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTBook.h; sourceTree = "<group>"; };
 		EDBD40071AC90EB1000A7B5F /* AGTBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTBook.m; sourceTree = "<group>"; };
+		EDBD40091AC91062000A7B5F /* AGTLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTLibrary.h; sourceTree = "<group>"; };
+		EDBD400A1AC91062000A7B5F /* AGTLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTLibrary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 			children = (
 				EDBD40061AC90EB1000A7B5F /* AGTBook.h */,
 				EDBD40071AC90EB1000A7B5F /* AGTBook.m */,
+				EDBD40091AC91062000A7B5F /* AGTLibrary.h */,
+				EDBD400A1AC91062000A7B5F /* AGTLibrary.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDBD400B1AC91062000A7B5F /* AGTLibrary.m in Sources */,
 				EDBD3FE51AC90A6F000A7B5F /* AppDelegate.m in Sources */,
 				EDBD40081AC90EB1000A7B5F /* AGTBook.m in Sources */,
 				EDBD3FE21AC90A6F000A7B5F /* main.m in Sources */,

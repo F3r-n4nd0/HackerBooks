@@ -16,4 +16,6 @@
 @property (strong, nonatomic) NSURL* urlImage;
 @property (strong, nonatomic) NSURL* urlPDF;
 
+-(BOOL) hasTag:(NSString*) tag;
+
 @end
