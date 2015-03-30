@@ -12,6 +12,7 @@
 		EDBD3FED1AC90A6F000A7B5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBD3FEC1AC90A6F000A7B5F /* Images.xcassets */; };
 		EDBD3FF01AC90A6F000A7B5F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBD3FEE1AC90A6F000A7B5F /* LaunchScreen.xib */; };
 		EDBD3FFC1AC90A6F000A7B5F /* HackerBooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD3FFB1AC90A6F000A7B5F /* HackerBooksTests.m */; };
+		EDBD40081AC90EB1000A7B5F /* AGTBook.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD40071AC90EB1000A7B5F /* AGTBook.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,8 @@
 		EDBD3FF51AC90A6F000A7B5F /* HackerBooksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerBooksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBD3FFA1AC90A6F000A7B5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDBD3FFB1AC90A6F000A7B5F /* HackerBooksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HackerBooksTests.m; sourceTree = "<group>"; };
+		EDBD40061AC90EB1000A7B5F /* AGTBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTBook.h; sourceTree = "<group>"; };
+		EDBD40071AC90EB1000A7B5F /* AGTBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTBook.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +79,7 @@
 		EDBD3FDE1AC90A6F000A7B5F /* HackerBooks */ = {
 			isa = PBXGroup;
 			children = (
+				EDBD40051AC90E0D000A7B5F /* Models */,
 				EDBD3FE31AC90A6F000A7B5F /* AppDelegate.h */,
 				EDBD3FE41AC90A6F000A7B5F /* AppDelegate.m */,
 				EDBD3FEC1AC90A6F000A7B5F /* Images.xcassets */,
@@ -109,6 +113,15 @@
 				EDBD3FFA1AC90A6F000A7B5F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EDBD40051AC90E0D000A7B5F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EDBD40061AC90EB1000A7B5F /* AGTBook.h */,
+				EDBD40071AC90EB1000A7B5F /* AGTBook.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBD3FE51AC90A6F000A7B5F /* AppDelegate.m in Sources */,
+				EDBD40081AC90EB1000A7B5F /* AGTBook.m in Sources */,
 				EDBD3FE21AC90A6F000A7B5F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +410,7 @@
 				EDBD40011AC90A6F000A7B5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EDBD40021AC90A6F000A7B5F /* Build configuration list for PBXNativeTarget "HackerBooksTests" */ = {
 			isa = XCConfigurationList;
@@ -404,6 +419,7 @@
 				EDBD40041AC90A6F000A7B5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
