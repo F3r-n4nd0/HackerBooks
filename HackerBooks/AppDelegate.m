@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "AGTLibrary.h"
 #import "Settings.h"
+#import "AGTLibraryTableViewController.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,22 @@
     [self verifyIsFirstRun];
     [self initWindow];
     [self downloadJsonDataIfNecessary];
+    
+    
+    NSURL* urlFullPathJsonData = [self fullPathJsonData];
+    
+    AGTLibrary *library = [AGTLibrary initWithJsonData:[NSData dataWithContentsOfURL:urlFullPathJsonData]];
+    
+    AGTLibraryTableViewController *libraryListVC = [[AGTLibraryTableViewController alloc]
+                                           initWithModel:library
+                                                    style:UITableViewStylePlain];
+    // Creamos el combinador
+    UINavigationController *navVC = [UINavigationController new];
+    [navVC pushViewController:libraryListVC
+                     animated:NO];
+
+    self.window.rootViewController = navVC;
+    
     return YES;
 }
 

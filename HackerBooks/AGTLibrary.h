@@ -12,10 +12,17 @@
 
 @interface AGTLibrary : NSObject
 
++(id)initWithJsonData:(NSData*) data;
+
+-(id)initWithJsonData:(NSData*) data;
+
 -(NSUInteger) booksCount;
+-(NSUInteger) bookFavoritesCount;
 -(NSArray*) tags;
 -(NSUInteger) bookCountForTag:(NSString*) tag;
 -(NSArray*) booksForTag:(NSString *) tag;
+-(AGTBook*) bookFavoriteForIndex:(NSUInteger)index;
 -(AGTBook*) bookForTag:(NSString*) tag atIndex:(NSUInteger) index;
+
 
 @end

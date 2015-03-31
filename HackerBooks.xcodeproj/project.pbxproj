@@ -14,6 +14,7 @@
 		EDBD3FFC1AC90A6F000A7B5F /* HackerBooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD3FFB1AC90A6F000A7B5F /* HackerBooksTests.m */; };
 		EDBD40081AC90EB1000A7B5F /* AGTBook.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD40071AC90EB1000A7B5F /* AGTBook.m */; };
 		EDBD400B1AC91062000A7B5F /* AGTLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD400A1AC91062000A7B5F /* AGTLibrary.m */; };
+		EDDEBE9E1ACB3BAA0047D641 /* AGTLibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDEBE9D1ACB3BAA0047D641 /* AGTLibraryTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 		EDBD40071AC90EB1000A7B5F /* AGTBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTBook.m; sourceTree = "<group>"; };
 		EDBD40091AC91062000A7B5F /* AGTLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTLibrary.h; sourceTree = "<group>"; };
 		EDBD400A1AC91062000A7B5F /* AGTLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTLibrary.m; sourceTree = "<group>"; };
+		EDDEBE9C1ACB3BAA0047D641 /* AGTLibraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTLibraryTableViewController.h; sourceTree = "<group>"; };
+		EDDEBE9D1ACB3BAA0047D641 /* AGTLibraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTLibraryTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 		EDBD3FDE1AC90A6F000A7B5F /* HackerBooks */ = {
 			isa = PBXGroup;
 			children = (
+				EDDEBE9B1ACB3B1A0047D641 /* Controllers */,
 				EDBD40051AC90E0D000A7B5F /* Models */,
 				EDBD3FE31AC90A6F000A7B5F /* AppDelegate.h */,
 				EDBD3FE41AC90A6F000A7B5F /* AppDelegate.m */,
@@ -129,6 +133,15 @@
 				EDBD400A1AC91062000A7B5F /* AGTLibrary.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		EDDEBE9B1ACB3B1A0047D641 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EDDEBE9C1ACB3BAA0047D641 /* AGTLibraryTableViewController.h */,
+				EDDEBE9D1ACB3BAA0047D641 /* AGTLibraryTableViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBD400B1AC91062000A7B5F /* AGTLibrary.m in Sources */,
+				EDDEBE9E1ACB3BAA0047D641 /* AGTLibraryTableViewController.m in Sources */,
 				EDBD3FE51AC90A6F000A7B5F /* AppDelegate.m in Sources */,
 				EDBD40081AC90EB1000A7B5F /* AGTBook.m in Sources */,
 				EDBD3FE21AC90A6F000A7B5F /* main.m in Sources */,

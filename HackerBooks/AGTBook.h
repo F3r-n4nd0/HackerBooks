@@ -15,7 +15,10 @@
 @property (strong, nonatomic) NSArray* tags;
 @property (strong, nonatomic) NSURL* urlImage;
 @property (strong, nonatomic) NSURL* urlPDF;
+@property (nonatomic) BOOL isFavorite;
 
++(id)initWithDictionary:(NSDictionary*)dictionary;
+-(id)initWithDictionary:(NSDictionary*)dictionary;
 -(BOOL) hasTag:(NSString*) tag;
 
 @end

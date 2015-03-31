@@ -17,6 +17,45 @@
 
 @implementation AGTLibrary
 
+
+#pragma - initializers
+
++(id) initWithJsonData:(NSData *)data {
+    return [[self alloc] initWithJsonData:data];
+}
+
+
+-(id) initWithJsonData:(NSData *)data {
+    if(self = [super init]) {
+        [self initializeDefault];
+        [self loadBooksfromJsonData:data];
+    }
+    return self;
+}
+
+
+-(void) initializeDefault {
+    self.books = [NSMutableArray array];
+}
+
+-(void) loadBooksfromJsonData:(NSData*) data {
+    NSError* error;
+    id arrayBooks = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    if(error) {
+        NSLog(@"Error try to read json data : %@",error);
+    }
+    if([arrayBooks isKindOfClass:[NSArray class]]) {
+        for (id bookDictionary in arrayBooks) {
+            if([bookDictionary isKindOfClass:[NSDictionary class]]) {
+                AGTBook* book = [AGTBook initWithDictionary:bookDictionary];
+                [self.books addObject:book];
+            }
+        }
+    }
+}
+
+#pragma - books handlers
+
 -(NSUInteger)booksCount {
     return [self.books count];
 }
@@ -52,6 +91,31 @@
 -(AGTBook*)bookForTag:(NSString *)tag atIndex:(NSUInteger)index {
     NSArray* bookWithTag = [self booksForTag:tag];
     return [bookWithTag objectAtIndex:index];
+}
+
+-(AGTBook*)bookFavoriteForIndex:(NSUInteger)index {
+    NSArray* booksFavorites = [self booksFavorites];
+    return [booksFavorites objectAtIndex:index];
+}
+
+-(NSUInteger)bookFavoritesCount {
+    NSUInteger resultCount = 0;
+    for (AGTBook* book in self.books) {
+        if([book isFavorite]) {
+            resultCount++;
+        }
+    }
+    return resultCount;
+}
+
+-(NSArray*)booksFavorites {
+    NSMutableArray* booksFavorites = [NSMutableArray array];
+    for (AGTBook* book in self.books) {
+        if([book isFavorite]) {
+            [booksFavorites addObject:book];
+        }
+    }
+    return [booksFavorites copy];
 }
 
 #pragma - Helper
