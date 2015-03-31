@@ -63,7 +63,7 @@
 
 -(void) downloadJsonDataIfNecessary {
     if(self.firstRun || ![self isHasDownloadedData]) {
-        [self readDataFromURL:[NSURL URLWithString:URL_JSON_DATA]];
+        [self readAsyncDataFromURL:[NSURL URLWithString:URL_JSON_DATA]];
     }
 }
 
@@ -84,11 +84,24 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
+-(void) readAsyncDataFromURL:(NSURL*) url {
+    __weak typeof(self) weak = self;
+    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url]
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (error) {
+                                   [weak showsingleAlertWithTitle:@"Error Download Data" message:error.localizedDescription];
+                                   return;
+                               }
+                               [weak saveJsonData:data];
+                           }];
+}
+
 -(NSURL*) fullPathJsonData {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *urlsDocumentDicrectory = [fileManager URLsForDirectory:NSDocumentDirectory
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    NSArray* urlsDocumentDirectory = [fileManager URLsForDirectory:NSDocumentDirectory
                                                           inDomains:NSUserDomainMask];
-    NSURL *urlDocument = [urlsDocumentDicrectory lastObject];
+    NSURL* urlDocument = [urlsDocumentDirectory lastObject];
     return [urlDocument URLByAppendingPathComponent:NAME_LOCAL_FILE_DATA];
 }
 
@@ -101,6 +114,11 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
+}
+
+-(void) saveJsonData:(NSData*) data {
+    NSURL* urlFullPathJsonData = [self fullPathJsonData];
+    [data writeToURL:urlFullPathJsonData atomically:YES];
 }
 
 @end
