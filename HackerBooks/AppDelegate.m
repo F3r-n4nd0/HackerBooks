@@ -7,18 +7,17 @@
 //
 
 #import "AppDelegate.h"
-
-@interface AppDelegate ()
-
-@end
+#import "AGTLibrary.h"
+#import "Settings.h"
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
-    [self.window setBackgroundColor:[UIColor whiteColor]];
-    [self.window makeKeyAndVisible];
+    
+    [self verifyIsFirstRun];
+    [self initWindow];
+    [self downloadJsonDataIfNecessary];
     return YES;
 }
 
@@ -42,6 +41,66 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+-(void) initWindow {
+    [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
+    [self.window setBackgroundColor:[UIColor whiteColor]];
+    [self.window makeKeyAndVisible];
+}
+
+-(void) verifyIsFirstRun {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:IS_FIRST_RUN]){
+        [self setFirstRun:TRUE];
+        [defaults setObject:[NSDate date] forKey:IS_FIRST_RUN];
+        [defaults synchronize];
+    }else{
+        [self setFirstRun:FALSE];
+    }
+}
+
+-(void) downloadJsonDataIfNecessary {
+    if(self.firstRun || ![self isHasDownloadedData]) {
+        [self readDataFromURL:[NSURL URLWithString:URL_JSON_DATA]];
+    }
+}
+
+-(BOOL) isHasDownloadedData {
+    NSURL* urlFullPathJsonData = [self fullPathJsonData];
+    return [urlFullPathJsonData checkResourceIsReachableAndReturnError:nil];
+}
+
+-(void) readDataFromURL:(NSURL*) url {
+    NSError* error;
+    NSData* jsonData = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&error];
+    if (error) {
+        [self showsingleAlertWithTitle:@"Error Download Data" message:error.localizedDescription];
+        return;
+    }
+    NSURL* urlFullPathJsonData = [self fullPathJsonData];
+    [jsonData writeToURL:urlFullPathJsonData atomically:YES];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+-(NSURL*) fullPathJsonData {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *urlsDocumentDicrectory = [fileManager URLsForDirectory:NSDocumentDirectory
+                                                          inDomains:NSUserDomainMask];
+    NSURL *urlDocument = [urlsDocumentDicrectory lastObject];
+    return [urlDocument URLByAppendingPathComponent:NAME_LOCAL_FILE_DATA];
+}
+
+
+-(void) showsingleAlertWithTitle:(NSString*)title
+                         message:(NSString*)message {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

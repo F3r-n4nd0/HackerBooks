@@ -11,7 +11,7 @@
 
 @interface AGTLibrary()
 
-@property (nonatomic,strong) NSArray* books;
+@property (nonatomic,strong) NSMutableArray* books;
 
 @end
 
@@ -53,6 +53,8 @@
     NSArray* bookWithTag = [self booksForTag:tag];
     return [bookWithTag objectAtIndex:index];
 }
+
+#pragma - Helper
 
 -(NSArray*)removeDuplicatesFromArray:(NSArray*) array {
     return [[NSSet setWithArray:array] allObjects];
