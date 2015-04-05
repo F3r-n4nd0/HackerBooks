@@ -6,7 +6,10 @@
 //  Copyright (c) 2015 f3rn4nd0. All rights reserved.
 //
 
+@import UIKit;
+
 #import "AGTBook.h"
+#import "AGTDownloader.h"
 
 @implementation AGTBook
 
@@ -40,6 +43,38 @@
 }
 
 
+-(BOOL)hasTag:(NSString *)tag {
+    return [self.tags containsObject:tag];
+}
+
+- (UIImage*) getimageOrDownload {
+    NSString* fileName = [self getFileNameFromURL:self.urlImage];
+    if([AGTDownloader isHasDownloadedFileFromName:fileName]){
+        NSData* dataImage = [AGTDownloader getDataFromLocalDocumentsWithName:fileName];
+        return [UIImage imageWithData:dataImage];
+    }
+    [AGTDownloader readAndSaveDataFromURL:self.urlImage andSaveWithName:fileName handleError:nil];
+    return nil;
+}
+
+- (NSString*) downloadPdf {
+    NSString* fileName = [self getFileNameFromURL:self.urlPDF];
+    if([AGTDownloader isHasDownloadedFileFromName:fileName]){
+        return [AGTDownloader urlInDocumentsFromThisFile:fileName].path;
+    }
+    [AGTDownloader readAndSaveDataFromURL:self.urlPDF andSaveWithName:fileName handleError:nil];
+    return nil;
+}
+
+
+-(BOOL) isPdfDownloaded {
+    NSString* fileName = [self getFileNameFromURL:self.urlPDF];
+    return [AGTDownloader isHasDownloadedFileFromName:fileName];
+}
+
+#pragma mark - Helper 
+
+
 -(NSArray*) trimWhitespaceFromArray:(NSArray*) array {
     NSMutableArray *trimmedStrings = [NSMutableArray arrayWithCapacity:array.count];
     for (NSString *string in array) {
@@ -57,8 +92,8 @@
     }
 }
 
--(BOOL)hasTag:(NSString *)tag {
-    return [self.tags containsObject:tag];
+-(NSString*) getFileNameFromURL:(NSURL*) url {
+    return [[url.path componentsSeparatedByString:@"/"] lastObject];
 }
 
 @end

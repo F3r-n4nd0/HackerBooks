@@ -10,8 +10,11 @@
 #import "AGTLibrary.h"
 #import "Settings.h"
 #import "AGTLibraryTableViewController.h"
+#import "AGTDownloader.h"
+#import "AGTBookViewController.h"
 
 @implementation AppDelegate
+
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -19,21 +22,16 @@
     [self verifyIsFirstRun];
     [self initWindow];
     [self downloadJsonDataIfNecessary];
-    
-    
-    NSURL* urlFullPathJsonData = [self fullPathJsonData];
-    
-    AGTLibrary *library = [AGTLibrary initWithJsonData:[NSData dataWithContentsOfURL:urlFullPathJsonData]];
-    
-    AGTLibraryTableViewController *libraryListVC = [[AGTLibraryTableViewController alloc]
-                                           initWithModel:library
-                                                    style:UITableViewStylePlain];
-    // Creamos el combinador
-    UINavigationController *navVC = [UINavigationController new];
-    [navVC pushViewController:libraryListVC
-                     animated:NO];
 
-    self.window.rootViewController = navVC;
+    NSData* dataLocalJson = [AGTDownloader getDataFromLocalDocumentsWithName:NAME_LOCAL_FILE_DATA];
+    AGTLibrary *library = [AGTLibrary initWithJsonData:dataLocalJson];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self configureForPadWithModel:library];
+    }else{
+        [self configureForPhoneWithModel:library];
+        
+    }
     
     return YES;
 }
@@ -78,50 +76,59 @@
     }
 }
 
+
 -(void) downloadJsonDataIfNecessary {
-    if(self.firstRun || ![self isHasDownloadedData]) {
+    if(self.firstRun || ![AGTDownloader isHasDownloadedFileFromName:NAME_LOCAL_FILE_DATA]) {
         [self readAsyncDataFromURL:[NSURL URLWithString:URL_JSON_DATA]];
     }
 }
 
--(BOOL) isHasDownloadedData {
-    NSURL* urlFullPathJsonData = [self fullPathJsonData];
-    return [urlFullPathJsonData checkResourceIsReachableAndReturnError:nil];
-}
 
--(void) readDataFromURL:(NSURL*) url {
-    NSError* error;
-    NSData* jsonData = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&error];
-    if (error) {
-        [self showsingleAlertWithTitle:@"Error Download Data" message:error.localizedDescription];
-        return;
-    }
-    NSURL* urlFullPathJsonData = [self fullPathJsonData];
-    [jsonData writeToURL:urlFullPathJsonData atomically:YES];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-}
 
 -(void) readAsyncDataFromURL:(NSURL*) url {
-    __weak typeof(self) weak = self;
-    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url]
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if (error) {
-                                   [weak showsingleAlertWithTitle:@"Error Download Data" message:error.localizedDescription];
-                                   return;
-                               }
-                               [weak saveJsonData:data];
-                           }];
+    __weak typeof(self) weakSelf = self;
+    [AGTDownloader readAndSaveDataFromURL:url andSaveWithName:NAME_LOCAL_FILE_DATA handleError:^(NSError *error) {
+        [weakSelf showsingleAlertWithTitle:@"Error Download Data" message:error.localizedDescription];
+    }];
 }
 
--(NSURL*) fullPathJsonData {
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSArray* urlsDocumentDirectory = [fileManager URLsForDirectory:NSDocumentDirectory
-                                                          inDomains:NSUserDomainMask];
-    NSURL* urlDocument = [urlsDocumentDirectory lastObject];
-    return [urlDocument URLByAppendingPathComponent:NAME_LOCAL_FILE_DATA];
+-(void) configureForPadWithModel:(AGTLibrary*)library{
+    
+    AGTLibraryTableViewController *libraryVC = [[AGTLibraryTableViewController alloc] initWithModel:library style:UITableViewStylePlain];
+    
+    AGTBookViewController *bookVC = [[AGTBookViewController alloc] initWithBook:[library firstBook]];
+    
+    UINavigationController *uNav = [UINavigationController new];
+    [uNav pushViewController:libraryVC animated:NO];
+    
+    UINavigationController *cNav = [UINavigationController new];
+    [cNav pushViewController:bookVC animated:NO];
+    
+    UISplitViewController *splitVC = [[UISplitViewController alloc]init];
+    splitVC.viewControllers = @[uNav, cNav];
+    
+    splitVC.delegate = bookVC;
+    libraryVC.delegate = bookVC;
+    
+    self.window.rootViewController = splitVC;
+    
 }
 
+-(void) configureForPhoneWithModel:(AGTLibrary*)library{
+    
+    AGTLibraryTableViewController *libraryVC = [[AGTLibraryTableViewController alloc]
+                                           initWithModel:library
+                                           style:UITableViewStylePlain];
+    UINavigationController *navVC = [UINavigationController new];
+    [navVC pushViewController:libraryVC
+                     animated:NO];
+    libraryVC.delegate = libraryVC;
+    self.window.rootViewController = navVC;
+}
+
+
+
+#pragma mark - Helper
 
 -(void) showsingleAlertWithTitle:(NSString*)title
                          message:(NSString*)message {
@@ -133,9 +140,6 @@
     [alert show];
 }
 
--(void) saveJsonData:(NSData*) data {
-    NSURL* urlFullPathJsonData = [self fullPathJsonData];
-    [data writeToURL:urlFullPathJsonData atomically:YES];
-}
+
 
 @end

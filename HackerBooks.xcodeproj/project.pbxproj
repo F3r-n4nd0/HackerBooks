@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3B4136D8876711385C12971 /* libPods-HackerBooks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DB0978FE5AD1AF256AE7C /* libPods-HackerBooks.a */; };
+		EDA9F9141AD17E3E001C2B26 /* AGTBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA9F9121AD17E3E001C2B26 /* AGTBookViewController.m */; };
+		EDA9F9151AD17E3E001C2B26 /* AGTBookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDA9F9131AD17E3E001C2B26 /* AGTBookViewController.xib */; };
+		EDA9F9181AD1BAF3001C2B26 /* AGTDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA9F9171AD1BAF3001C2B26 /* AGTDownloader.m */; };
 		EDBD3FE21AC90A6F000A7B5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD3FE11AC90A6F000A7B5F /* main.m */; };
 		EDBD3FE51AC90A6F000A7B5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD3FE41AC90A6F000A7B5F /* AppDelegate.m */; };
 		EDBD3FED1AC90A6F000A7B5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBD3FEC1AC90A6F000A7B5F /* Images.xcassets */; };
@@ -14,6 +18,9 @@
 		EDBD3FFC1AC90A6F000A7B5F /* HackerBooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD3FFB1AC90A6F000A7B5F /* HackerBooksTests.m */; };
 		EDBD40081AC90EB1000A7B5F /* AGTBook.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD40071AC90EB1000A7B5F /* AGTBook.m */; };
 		EDBD400B1AC91062000A7B5F /* AGTLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBD400A1AC91062000A7B5F /* AGTLibrary.m */; };
+		EDC076A21ACC36C3009871BE /* AGTBookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC076A01ACC36C3009871BE /* AGTBookTableViewCell.m */; };
+		EDC076A31ACC36C3009871BE /* AGTBookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDC076A11ACC36C3009871BE /* AGTBookTableViewCell.xib */; };
+		EDC076A61ACC88D7009871BE /* no_book_cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDC076A51ACC88D7009871BE /* no_book_cover.jpg */; };
 		EDDEBE9E1ACB3BAA0047D641 /* AGTLibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDEBE9D1ACB3BAA0047D641 /* AGTLibraryTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +35,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B214813691CF69343386958 /* Pods-HackerBooks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackerBooks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackerBooks/Pods-HackerBooks.debug.xcconfig"; sourceTree = "<group>"; };
+		4C6674F5590FD0565FE2B654 /* Pods-HackerBooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackerBooks.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackerBooks/Pods-HackerBooks.release.xcconfig"; sourceTree = "<group>"; };
+		7F6DB0978FE5AD1AF256AE7C /* libPods-HackerBooks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HackerBooks.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED3AA0851ACAEF870016F2A8 /* Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		EDA9F9111AD17E3E001C2B26 /* AGTBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTBookViewController.h; sourceTree = "<group>"; };
+		EDA9F9121AD17E3E001C2B26 /* AGTBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTBookViewController.m; sourceTree = "<group>"; };
+		EDA9F9131AD17E3E001C2B26 /* AGTBookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGTBookViewController.xib; sourceTree = "<group>"; };
+		EDA9F9161AD1BAF3001C2B26 /* AGTDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTDownloader.h; sourceTree = "<group>"; };
+		EDA9F9171AD1BAF3001C2B26 /* AGTDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTDownloader.m; sourceTree = "<group>"; };
 		EDBD3FDC1AC90A6F000A7B5F /* HackerBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBD3FE01AC90A6F000A7B5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDBD3FE11AC90A6F000A7B5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -43,6 +58,10 @@
 		EDBD40071AC90EB1000A7B5F /* AGTBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTBook.m; sourceTree = "<group>"; };
 		EDBD40091AC91062000A7B5F /* AGTLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTLibrary.h; sourceTree = "<group>"; };
 		EDBD400A1AC91062000A7B5F /* AGTLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTLibrary.m; sourceTree = "<group>"; };
+		EDC0769F1ACC36C3009871BE /* AGTBookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTBookTableViewCell.h; sourceTree = "<group>"; };
+		EDC076A01ACC36C3009871BE /* AGTBookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTBookTableViewCell.m; sourceTree = "<group>"; };
+		EDC076A11ACC36C3009871BE /* AGTBookTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGTBookTableViewCell.xib; sourceTree = "<group>"; };
+		EDC076A51ACC88D7009871BE /* no_book_cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = no_book_cover.jpg; sourceTree = "<group>"; };
 		EDDEBE9C1ACB3BAA0047D641 /* AGTLibraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTLibraryTableViewController.h; sourceTree = "<group>"; };
 		EDDEBE9D1ACB3BAA0047D641 /* AGTLibraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTLibraryTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B4136D8876711385C12971 /* libPods-HackerBooks.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,12 +85,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21EDEF40D57610C08FB49FD6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0B214813691CF69343386958 /* Pods-HackerBooks.debug.xcconfig */,
+				4C6674F5590FD0565FE2B654 /* Pods-HackerBooks.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		681FA4AA17AE59C89F587C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7F6DB0978FE5AD1AF256AE7C /* libPods-HackerBooks.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EDBD3FD31AC90A6F000A7B5F = {
 			isa = PBXGroup;
 			children = (
 				EDBD3FDE1AC90A6F000A7B5F /* HackerBooks */,
 				EDBD3FF81AC90A6F000A7B5F /* HackerBooksTests */,
 				EDBD3FDD1AC90A6F000A7B5F /* Products */,
+				21EDEF40D57610C08FB49FD6 /* Pods */,
+				681FA4AA17AE59C89F587C8A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +125,8 @@
 		EDBD3FDE1AC90A6F000A7B5F /* HackerBooks */ = {
 			isa = PBXGroup;
 			children = (
+				EDC076A41ACC8861009871BE /* Resources */,
+				EDC0769E1ACC369A009871BE /* Views */,
 				EDDEBE9B1ACB3B1A0047D641 /* Controllers */,
 				EDBD40051AC90E0D000A7B5F /* Models */,
 				EDBD3FE31AC90A6F000A7B5F /* AppDelegate.h */,
@@ -131,8 +172,28 @@
 				EDBD40071AC90EB1000A7B5F /* AGTBook.m */,
 				EDBD40091AC91062000A7B5F /* AGTLibrary.h */,
 				EDBD400A1AC91062000A7B5F /* AGTLibrary.m */,
+				EDA9F9161AD1BAF3001C2B26 /* AGTDownloader.h */,
+				EDA9F9171AD1BAF3001C2B26 /* AGTDownloader.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		EDC0769E1ACC369A009871BE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EDC0769F1ACC36C3009871BE /* AGTBookTableViewCell.h */,
+				EDC076A01ACC36C3009871BE /* AGTBookTableViewCell.m */,
+				EDC076A11ACC36C3009871BE /* AGTBookTableViewCell.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		EDC076A41ACC8861009871BE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EDC076A51ACC88D7009871BE /* no_book_cover.jpg */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EDDEBE9B1ACB3B1A0047D641 /* Controllers */ = {
@@ -140,6 +201,9 @@
 			children = (
 				EDDEBE9C1ACB3BAA0047D641 /* AGTLibraryTableViewController.h */,
 				EDDEBE9D1ACB3BAA0047D641 /* AGTLibraryTableViewController.m */,
+				EDA9F9111AD17E3E001C2B26 /* AGTBookViewController.h */,
+				EDA9F9121AD17E3E001C2B26 /* AGTBookViewController.m */,
+				EDA9F9131AD17E3E001C2B26 /* AGTBookViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -151,9 +215,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDBD3FFF1AC90A6F000A7B5F /* Build configuration list for PBXNativeTarget "HackerBooks" */;
 			buildPhases = (
+				D96358A35F50637DB7C263AF /* Check Pods Manifest.lock */,
 				EDBD3FD81AC90A6F000A7B5F /* Sources */,
 				EDBD3FD91AC90A6F000A7B5F /* Frameworks */,
 				EDBD3FDA1AC90A6F000A7B5F /* Resources */,
+				506DDFF5DA50575529F605B1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -224,6 +290,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDC076A31ACC36C3009871BE /* AGTBookTableViewCell.xib in Resources */,
+				EDA9F9151AD17E3E001C2B26 /* AGTBookViewController.xib in Resources */,
+				EDC076A61ACC88D7009871BE /* no_book_cover.jpg in Resources */,
 				EDBD3FF01AC90A6F000A7B5F /* LaunchScreen.xib in Resources */,
 				EDBD3FED1AC90A6F000A7B5F /* Images.xcassets in Resources */,
 			);
@@ -238,6 +307,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		506DDFF5DA50575529F605B1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HackerBooks/Pods-HackerBooks-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D96358A35F50637DB7C263AF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EDBD3FD81AC90A6F000A7B5F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -248,6 +350,9 @@
 				EDBD3FE51AC90A6F000A7B5F /* AppDelegate.m in Sources */,
 				EDBD40081AC90EB1000A7B5F /* AGTBook.m in Sources */,
 				EDBD3FE21AC90A6F000A7B5F /* main.m in Sources */,
+				EDA9F9181AD1BAF3001C2B26 /* AGTDownloader.m in Sources */,
+				EDC076A21ACC36C3009871BE /* AGTBookTableViewCell.m in Sources */,
+				EDA9F9141AD17E3E001C2B26 /* AGTBookViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +464,7 @@
 		};
 		EDBD40001AC90A6F000A7B5F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B214813691CF69343386958 /* Pods-HackerBooks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HackerBooks/Info.plist;
@@ -370,6 +476,7 @@
 		};
 		EDBD40011AC90A6F000A7B5F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C6674F5590FD0565FE2B654 /* Pods-HackerBooks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HackerBooks/Info.plist;

@@ -6,9 +6,14 @@
 //  Copyright (c) 2015 f3rn4nd0. All rights reserved.
 //
 
+#import <Reader/ReaderViewController.h>
+
 #import "AGTLibraryTableViewController.h"
 #import "AGTLibrary.h"
 #import "AGTBook.h"
+#import "AGTBookTableViewCell.h"
+#import "AGTBookViewController.h"
+#import "Settings.h"
 
 @interface AGTLibraryTableViewController ()
 
@@ -21,24 +26,56 @@
     
     if (self = [super initWithStyle:style]) {
         _library = library;
-        self.title = @"List Books";
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setTitle:@"List Books"];
+    UINib *nib = [UINib nibWithNibName:@"AGTBookTableViewCell" bundle:[NSBundle mainBundle]];
+    [self.tableView registerNib:nib forCellReuseIdentifier:[AGTBookTableViewCell cellId]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBook:) name:NOTIFICATION_CHANGE_BOOK object:nil];    
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_CHANGE_BOOK object:nil];
+    [super viewWillDisappear:animated];
+}
+
+#pragma mark - notifications
+
+-(void)changeBook:(AGTBook*) book {
+    [self.library changeBook:book];
+    [self.tableView reloadData];
+}
+
+#pragma mark - AGTUniverseTableViewControllerDelegate
+-(void)libraryTableViewController:(AGTLibraryTableViewController *)viewController disSelectBook:(AGTBook *)book {
+
+    AGTBookViewController *charVC = [[AGTBookViewController alloc] initWithBook:book];
+    [self.navigationController pushViewController:charVC
+                                     animated:YES];
+}
+
 
 #pragma mark - Table view data source
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.library tags].count + 1;
+     return [self.library tags].count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -52,7 +89,7 @@
     if(section == 0) {
         return @"Favorites";
     }
-    return [self.library.tags objectAtIndex:section-1];
+    return [[self.library.tags objectAtIndex:section-1] capitalizedString];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -62,16 +99,25 @@
     } else {
         book = [self.library bookForTag:[self.library.tags objectAtIndex:indexPath.section -1] atIndex:indexPath.row];
     }
-    static NSString *cellId = @"BookCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]
-                initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:cellId];
-    }
-    [cell.textLabel setText:book.title];
+    AGTBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AGTBookTableViewCell cellId] forIndexPath:indexPath];
+
+    [cell.labelTitle setText:book.title];
+    [cell.labelAuthors setText:[book.authors componentsJoinedByString:@" , "]];
+    [cell.imageViewCover setImage:[book getimageOrDownload]];
     return cell;
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    AGTBook *book;
+    if(indexPath.section == 0) {
+        book = [self.library bookFavoriteForIndex:indexPath.row];
+    } else {
+        book = [self.library bookForTag:[self.library.tags objectAtIndex:indexPath.section -1] atIndex:indexPath.row];
+    }
+    if ([self.delegate respondsToSelector:@selector(libraryTableViewController:disSelectBook:)]) {
+        [self.delegate libraryTableViewController:self disSelectBook:book];
+    }
+}
 
 @end

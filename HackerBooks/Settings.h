@@ -14,3 +14,7 @@
 
 #define URL_JSON_DATA @"https://t.co/K9ziV0z3SJ"
 #define NAME_LOCAL_FILE_DATA @"data.json"
+
+
+
+#define NOTIFICATION_CHANGE_BOOK @"NOTIFICATION_CHANGE_BOOK"

@@ -39,6 +39,9 @@
 }
 
 -(void) loadBooksfromJsonData:(NSData*) data {
+    if(data == nil) {
+        return;
+    }
     NSError* error;
     id arrayBooks = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     if(error) {
@@ -117,6 +120,18 @@
     }
     return [booksFavorites copy];
 }
+
+-(AGTBook*) firstBook {
+    return [self.books firstObject];
+}
+
+-(void) changeBook:(AGTBook*) book {
+    if([self.books containsObject:book]) {
+        NSUInteger index = [self.books indexOfObject:book];
+        [self.books replaceObjectAtIndex:index withObject:book];
+    }
+}
+
 
 #pragma - Helper
 

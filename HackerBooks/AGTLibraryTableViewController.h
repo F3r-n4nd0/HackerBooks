@@ -8,15 +8,24 @@
 
 @import UIKit;
 
+@class AGTBook;
 @class AGTLibrary;
+@class AGTLibraryTableViewController;
 
-@interface AGTLibraryTableViewController : UITableViewController
+@protocol AGTLibraryTableViewControllerDelegate <NSObject>
+
+-(void) libraryTableViewController:(AGTLibraryTableViewController*) viewController disSelectBook:(AGTBook*) book;
+
+@end
+
+
+@interface AGTLibraryTableViewController : UITableViewController <AGTLibraryTableViewControllerDelegate>
 
 @property (strong, nonatomic) AGTLibrary* library;
-
+@property (weak, nonatomic) id<AGTLibraryTableViewControllerDelegate> delegate;
 
 -(id) initWithModel:(AGTLibrary*) library
               style:(UITableViewStyle)style;
 
-
 @end
+

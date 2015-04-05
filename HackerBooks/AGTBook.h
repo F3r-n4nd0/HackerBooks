@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 f3rn4nd0. All rights reserved.
 //
 
+@import UIKit;
 @import Foundation;
 
 @interface AGTBook : NSObject
@@ -19,6 +20,9 @@
 
 +(id)initWithDictionary:(NSDictionary*)dictionary;
 -(id)initWithDictionary:(NSDictionary*)dictionary;
--(BOOL) hasTag:(NSString*) tag;
+-(BOOL)hasTag:(NSString*) tag;
+-(UIImage*)getimageOrDownload;
+-(NSString*) downloadPdf;
+-(BOOL) isPdfDownloaded;
 
 @end

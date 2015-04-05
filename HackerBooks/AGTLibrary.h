@@ -23,6 +23,7 @@
 -(NSArray*) booksForTag:(NSString *) tag;
 -(AGTBook*) bookFavoriteForIndex:(NSUInteger)index;
 -(AGTBook*) bookForTag:(NSString*) tag atIndex:(NSUInteger) index;
-
+-(AGTBook*) firstBook;
+-(void) changeBook:(AGTBook*) book;
 
 @end
