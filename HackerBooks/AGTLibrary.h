@@ -8,9 +8,16 @@
 
 @import Foundation;
 
-@class AGTBook;
+#import "AGTBook.h"
 
-@interface AGTLibrary : NSObject
+@protocol AGTLibraryDelegate <NSObject>
+-(void)modifyDataLibrary;
+@end
+
+@interface AGTLibrary : NSObject <AGTBookDelegate>
+
+@property (weak, nonatomic) id<AGTLibraryDelegate> delegate;
+@property (readonly) BOOL hasLoadBooks;
 
 +(id)initWithJsonData:(NSData*) data;
 

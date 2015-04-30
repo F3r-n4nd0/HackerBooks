@@ -12,6 +12,8 @@
 @class AGTLibrary;
 @class AGTLibraryTableViewController;
 
+#import "AGTLibrary.h"
+
 @protocol AGTLibraryTableViewControllerDelegate <NSObject>
 
 -(void) libraryTableViewController:(AGTLibraryTableViewController*) viewController disSelectBook:(AGTBook*) book;
@@ -19,7 +21,7 @@
 @end
 
 
-@interface AGTLibraryTableViewController : UITableViewController <AGTLibraryTableViewControllerDelegate>
+@interface AGTLibraryTableViewController : UITableViewController <AGTLibraryTableViewControllerDelegate,AGTLibraryDelegate>
 
 @property (strong, nonatomic) AGTLibrary* library;
 @property (weak, nonatomic) id<AGTLibraryTableViewControllerDelegate> delegate;

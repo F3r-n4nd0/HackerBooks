@@ -7,8 +7,12 @@
 //
 
 #import "AGTDownloader.h"
+#import "Settings.h"
 
 @implementation AGTDownloader
+
+static NSMutableArray *downloadingUrlData;
+
 
 +(NSURL*) urlInDocumentsFromThisFile:(NSString*) file {
     NSFileManager* fileManager = [NSFileManager defaultManager];
@@ -18,16 +22,25 @@
     return [urlDocument URLByAppendingPathComponent:file];
 }
 
-
-+(void) readAndSaveDataFromURL:(NSURL*) url  andSaveWithName:(NSString*) fileName handleError:(void (^)(NSError* error)) handleError {
++(void) readAndSaveDataFromURL:(NSURL*) url  andSaveWithName:(NSString*) fileName handleError:(void (^)(NSError* error)) handleError confirmationUpdate:(void(^)()) confirmationUpdate {
+    if (!downloadingUrlData)
+        downloadingUrlData = [[NSMutableArray alloc] init];
+    [downloadingUrlData addObject:url];
     [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (error) {
-                                   handleError(error);
+                                   if(handleError) {
+                                       handleError(error);
+                                   }
+                                   [downloadingUrlData removeObject:url];
                                    return;
                                }
                                [AGTDownloader saveData:data whitFile:fileName];
+                               if(confirmationUpdate) {
+                                   confirmationUpdate();
+                               }
+                               [downloadingUrlData removeObject:url];
                            }];
 }
 
@@ -40,6 +53,10 @@
 +(BOOL) isHasDownloadedFileFromName:(NSString*) fileName {
     NSURL* urlFullPathJsonData = [AGTDownloader urlInDocumentsFromThisFile:fileName];
     return [urlFullPathJsonData checkResourceIsReachableAndReturnError:nil];
+}
+
++(BOOL) isDownloadingDataFromUrl:(NSURL*) url {
+    return [downloadingUrlData containsObject:url];
 }
 
 +(NSData*) getDataFromLocalDocumentsWithName:(NSString*) fileName {

@@ -34,22 +34,13 @@
     [super viewDidLoad];
     
     [self setTitle:@"List Books"];
+    self.library.delegate = self;
     UINib *nib = [UINib nibWithNibName:@"AGTBookTableViewCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib forCellReuseIdentifier:[AGTBookTableViewCell cellId]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBook:) name:NOTIFICATION_CHANGE_BOOK object:nil];    
-}
-
--(void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_CHANGE_BOOK object:nil];
-    [super viewWillDisappear:animated];
 }
 
 #pragma mark - notifications
@@ -118,6 +109,13 @@
     if ([self.delegate respondsToSelector:@selector(libraryTableViewController:disSelectBook:)]) {
         [self.delegate libraryTableViewController:self disSelectBook:book];
     }
+    [[NSUserDefaults standardUserDefaults] setObject:book.title forKey:LAST_BOOK];
+}
+
+#pragma mark - Delegate Library
+
+-(void)modifyDataLibrary {
+    [self.tableView reloadData];
 }
 
 @end

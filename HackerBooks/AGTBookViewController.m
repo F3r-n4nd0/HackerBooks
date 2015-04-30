@@ -28,6 +28,22 @@
     self.navigationController.navigationBar.translucent = NO;
 }
 
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadBook:) name:FINISH_DOWNLOAD_BOOK object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:FINISH_DOWNLOAD_BOOK object:nil];
+    [super viewWillDisappear:animated];
+}
+
+-(void)downloadBook:(NSNotification*) notification {
+    if(notification.object == self.book) {
+        [self updateStatusPdfBook];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -40,17 +56,30 @@
     [self.labelTag setText:[self.book.tags componentsJoinedByString:@" , "]];
     [self.switchIsFavorite setOn:self.book.isFavorite animated:YES];
     
-    if([self.book isPdfDownloaded]){
-        [self.buttonDownloadAndView setTitle:@"VIEW" forState:UIControlStateNormal];
-    } else {
-        [self.buttonDownloadAndView setTitle:@"DOWNLOAD" forState:UIControlStateNormal];
-    }
+    [self updateStatusPdfBook];
 }
 
+-(void) updateStatusPdfBook {
+    if([self.book isPdfDownloaded]){
+        [self.buttonDownloadAndView setTitle:@"VIEW BOOK" forState:UIControlStateNormal];
+        [self.buttonDownloadAndView setEnabled:YES];
+    } else if ([self.book isDownloadingPdf]){
+        [self.buttonDownloadAndView setTitle:@"DOWNLOADING BOOK" forState:UIControlStateNormal];
+        [self.buttonDownloadAndView setEnabled:NO];
+    } else {
+        [self.buttonDownloadAndView setTitle:@"DOWNLOAD BOOK" forState:UIControlStateNormal];
+        [self.buttonDownloadAndView setEnabled:YES];
+    }
+    
+}
 #pragma mark - events views
 
 - (IBAction)changeSwitchIsFavorite:(UISwitch *)sender {
-    [self.book setIsFavorite:sender.isOn];
+    if(sender.isOn) {
+        [self.book addToFavorites];
+    } else {
+        [self.book removeToFavorites];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHANGE_BOOK object:self.book];
 }
 
@@ -61,6 +90,7 @@
         [self.navigationController pushViewController:readerViewController animated:YES];
     } else {
         [self.book downloadPdf];
+        [self updateStatusPdfBook];
     }
 }
 

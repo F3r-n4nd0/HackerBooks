@@ -79,7 +79,7 @@
 
 -(void) downloadJsonDataIfNecessary {
     if(self.firstRun || ![AGTDownloader isHasDownloadedFileFromName:NAME_LOCAL_FILE_DATA]) {
-        [self readAsyncDataFromURL:[NSURL URLWithString:URL_JSON_DATA]];
+        [self readAsyncDataFromURL:[NSURL URLWithString:URL_JSON_DATA] ];
     }
 }
 
@@ -89,6 +89,8 @@
     __weak typeof(self) weakSelf = self;
     [AGTDownloader readAndSaveDataFromURL:url andSaveWithName:NAME_LOCAL_FILE_DATA handleError:^(NSError *error) {
         [weakSelf showsingleAlertWithTitle:@"Error Download Data" message:error.localizedDescription];
+    } confirmationUpdate:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LOAD_BOOK object:self];
     }];
 }
 

@@ -11,8 +11,9 @@
 @interface AGTDownloader : NSObject
 
 +(NSURL*) urlInDocumentsFromThisFile:(NSString*) file;
-+(void) readAndSaveDataFromURL:(NSURL*) url  andSaveWithName:(NSString*) fileName handleError:(void (^)(NSError* error)) handleError;
++(void) readAndSaveDataFromURL:(NSURL*) url  andSaveWithName:(NSString*) fileName handleError:(void (^)(NSError* error)) handleError confirmationUpdate:(void(^)()) confirmationUpdate;
 +(void) saveData:(NSData*) data  whitFile:(NSString*) fileName;
 +(BOOL) isHasDownloadedFileFromName:(NSString*) fileName;
 +(NSData*) getDataFromLocalDocumentsWithName:(NSString*) fileName;
++(BOOL) isDownloadingDataFromUrl:(NSURL*) url;
 @end

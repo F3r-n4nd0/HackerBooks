@@ -10,6 +10,13 @@
 
 #import "AGTBook.h"
 #import "AGTDownloader.h"
+#import "Settings.h"
+
+
+@interface AGTBook () 
+@property (nonatomic) BOOL isFavorite;
+@end
+
 
 @implementation AGTBook
 
@@ -53,7 +60,7 @@
         NSData* dataImage = [AGTDownloader getDataFromLocalDocumentsWithName:fileName];
         return [UIImage imageWithData:dataImage];
     }
-    [AGTDownloader readAndSaveDataFromURL:self.urlImage andSaveWithName:fileName handleError:nil];
+    [AGTDownloader readAndSaveDataFromURL:self.urlImage andSaveWithName:fileName handleError:nil confirmationUpdate:nil];
     return nil;
 }
 
@@ -62,7 +69,11 @@
     if([AGTDownloader isHasDownloadedFileFromName:fileName]){
         return [AGTDownloader urlInDocumentsFromThisFile:fileName].path;
     }
-    [AGTDownloader readAndSaveDataFromURL:self.urlPDF andSaveWithName:fileName handleError:nil];
+    [AGTDownloader readAndSaveDataFromURL:self.urlPDF andSaveWithName:fileName handleError:^(NSError *error) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:FINISH_DOWNLOAD_BOOK object:self];
+    } confirmationUpdate:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:FINISH_DOWNLOAD_BOOK object:self];
+    }];
     return nil;
 }
 
@@ -70,6 +81,10 @@
 -(BOOL) isPdfDownloaded {
     NSString* fileName = [self getFileNameFromURL:self.urlPDF];
     return [AGTDownloader isHasDownloadedFileFromName:fileName];
+}
+
+-(BOOL) isDownloadingPdf {
+    return [AGTDownloader isDownloadingDataFromUrl:self.urlPDF];
 }
 
 #pragma mark - Helper 
@@ -94,6 +109,19 @@
 
 -(NSString*) getFileNameFromURL:(NSURL*) url {
     return [[url.path componentsSeparatedByString:@"/"] lastObject];
+}
+
+-(void) addToFavorites {
+    self.isFavorite = YES;
+    if([self.delegate respondsToSelector:@selector(willChangeToFavorite:)]){
+        [self.delegate willChangeToFavorite:self];
+    }
+}
+-(void) removeToFavorites {
+    self.isFavorite = NO;
+    if([self.delegate respondsToSelector:@selector(willChangeToFavorite:)]){
+        [self.delegate willChangeToFavorite:self];
+    }
 }
 
 @end
